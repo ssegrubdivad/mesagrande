@@ -73,7 +73,7 @@ SOFTWARE.
 
 ## Included Methods
 
-* [Calculate Distance](https://github.com/ssegrubdivad/mesagrande#calculate-distance)
+* [Calculate Distance](#calculate-distance)
 * Move Randomly 
 * Move Away 
 * Move Toward
