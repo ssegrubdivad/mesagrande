@@ -4,7 +4,7 @@
 MesaGrande is a package of methods for use with the Mesa module in Python. Mesa supports the design and development of agent-based models (ABMs) that simulate the complexities of social interactions. These methods were designed, written, and tested by David Burgess (University of Saskatchewan), with acknowledgement (and equal parts frustration) attributed to OpenAI's ChatGPT. The below methods are contained within a custom Agent class (named AgentGrande) used with the Mesa module for Python designed by the members of Project Mesa. The included 20 methods have been designed to provide a quick-start means of implementing common, rudimentary, micro-social, -economic, and -health behaviours for agents of an Agent-Based Model (ABM). The methods rely on the existing design of the Agent class in the Mesa module.
 Mesa Grande is a sub-division in Mesa.
 
-##Usage**
+## Usage
 ----------
 
 1. Download (or copy and paste the content of) the mesaGrande.py file and place it in the same directory as your simulation's ```agent.py```, ```model.py```, and ```server.py``` files.
@@ -19,12 +19,12 @@ class MyAgent(AgentGrande):
 ```
 4. All of the methods included may now be used within your simulation.
 
-##Limitations and Assumptions**
+## Limitations and Assumptions
 ----------
 
 The methods assume that the ```MultiGrid``` class is used and that the grid (or lattice) is toroidal. Agent neighbourhoods are assumed to be Moore.
 
-##Modified MIT License**
+## Modified MIT License
 ----------
 
 Copyright (c) 2023 David Burgess, University of Saskatchewan
@@ -70,7 +70,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-##Included Methods
+## Included Methods
 ----------
 
 * Calculate Distance
@@ -95,26 +95,26 @@ SOFTWARE.
 * Play Tag
 
 
-###Calculate Distance
+### Calculate Distance
 
 This method takes two positions as tuples of integers as its arguments and then calculates and returns as an integer the spacial distance from the first positional argument to the second positional argument.
 
-Potential Use: This method may be useful as a helper method for other micro-behaviour methods, and it is used as such within other methods of MesaGrande.
+**Potential Use:** This method may be useful as a helper method for other micro-behaviour methods, and it is used as such within other methods of MesaGrande.
 
-Call: You may call this method from within the ```step()``` method of an agent, as shown below; it calculates the spacial distance between two positions passed as arguments to the method:
+**Call:** You may call this method from within the ```step()``` method of an agent, as shown below; it calculates the spacial distance between two positions passed as arguments to the method:
 ```python
 step():
     self.calculate_distance(pos1, pos2)
 ```
 
 
-###Move Randomly
+### Move Randomly
 
 This method uses the ```get_neighborhood()``` method of the MultiGrid class to retrieve all possible positions that are within a radius of 1 of the current position. It then chooses one of these positions randomly and uses the ```move_agent()``` method of the MultiGrid to move the agent to that position.
 
-Potential Use: This method provides the most rudimentary behaviour for any agent and may be additionally helpful for testing purposes in early model and agent development.
+**Potential Use:** This method provides the most rudimentary behaviour for any agent and may be additionally helpful for testing purposes in early model and agent development.
 
-Call: You may call this method in the ```step()``` method of an agent, as shown below; it moves the calling agent one step on the grid in a random direction away from the calling agent's current position:
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it moves the calling agent one step on the grid in a random direction away from the calling agent's current position:
 ```python
 step():
     self.move_randomly()
