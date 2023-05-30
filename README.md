@@ -6,7 +6,7 @@ Mesa Grande is a sub-division in Mesa.
 
 **Usage:**
 
-1. Download (or copy and paste the content of) the mesaGrande.py file and place it in the same directory as your simulation's agent.py, model.py, and server.py files.
+1. Download (or copy and paste the content of) the mesaGrande.py file and place it in the same directory as your simulation's ```agent.py```, ```model.py```, and ```server.py``` files.
 2. Within the agent.py file, ensure the following import line is included:
 ```python & mesa
 from mesaGrande import AgentGrande
