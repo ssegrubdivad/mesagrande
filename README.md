@@ -94,6 +94,7 @@ SOFTWARE.
 * Interact with Random Other Agent
 * Play Tag
 
+
 **Calculate Distance**
 
 This method takes two positions as tuples of integers as its arguments and then calculates and returns as an integer the spacial distance from the first positional argument to the second positional argument.
@@ -105,3 +106,18 @@ Call: You may call this method from within the ```step()``` method of an agent, 
 step():
     self.calculate_distance(pos1, pos2)
 ```
+
+
+**Move Randomly**
+
+This method uses the ```get_neighborhood()``` method of the MultiGrid class to retrieve all possible positions that are within a radius of 1 of the current position. It then chooses one of these positions randomly and uses the ```move_agent()``` method of the MultiGrid to move the agent to that position.
+
+Potential Use: This method provides the most rudimentary behaviour for any agent and may be additionally helpful for testing purposes in early model and agent development.
+
+Call: You may call this method in the ```step()``` method of an agent, as shown below; it moves the calling agent one step on the grid in a random direction away from the calling agent's current position:
+```python
+step():
+    self.move_randomly()
+```
+
+
