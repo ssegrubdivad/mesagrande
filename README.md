@@ -69,3 +69,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+**Included Methods**
+----------
+* Calculate Distance
+* Move Randomly
+* Move Away
+* Move Toward
+* Choose Random Agent Variable Value
+* Increment Other Agent Variable
+* Decrement Other Agent Variable
+* Change Other Agent Variable
+* Update Agent Record
+* Update Agent Record in Radius
+* Edit Other Agent's Variable
+* Only I Edit Other Agent's Variable
+* Increment Self Attribute
+* Decrement Self Attribute
+* Move Toward Position
+* Move Randomly, Collision Increment
+* Move Randomly, Collision Decrement
+* Move Between Positions
+* Interact with Random Other Agent
+* Play Tag
+
