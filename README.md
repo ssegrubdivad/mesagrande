@@ -5,6 +5,7 @@ MesaGrande is a package of methods for use with the Mesa module in Python. Mesa 
 Mesa Grande is a sub-division in Mesa.
 
 **Usage:**
+----------
 
 1. Download (or copy and paste the content of) the mesaGrande.py file and place it in the same directory as your simulation's ```agent.py```, ```model.py```, and ```server.py``` files.
 2. Within the agent.py file, ensure the following import line is included:
@@ -23,6 +24,7 @@ class MyAgent(AgentGrande):
 The methods assume that the ```MultiGrid``` class is used and that the grid (or lattice) is toroidal. Agent neighbourhoods are assumed to be Moore.
 
 **Modified MIT License**
+----------
 
 Copyright (c) 2023 David Burgess, University of Saskatchewan
 
@@ -41,26 +43,26 @@ from the use of this Software must include a citation analogous to the following
 
 AMA:
 
-Burgess, D. MesaGrande [Computer software]. Version 1.0. Saskatoon, Canada: 
+* Burgess, D. MesaGrande [Computer software]. Version 1.0. Saskatoon, Canada: 
 University of Saskatchewan; 2023.
 
 APA:
 
-Burgess, D. (2023). MesaGrande (1.0) [Computer software]. University of 
+* Burgess, D. (2023). MesaGrande (1.0) [Computer software]. University of 
 Saskatchewan. http://github.com/ssegrubdivad/mesagrande
 
 Chicago:
 
-Burgess, David. MesaGrande. V. 1.0. University of Saskatchewan. Python. 2023.
+* Burgess, David. MesaGrande. V. 1.0. University of Saskatchewan. Python. 2023.
 
 Harvard:
 
-Burgess, D. (2023) MesaGrande (Version 1.0) [Computer program]. University of 
+* Burgess, D. (2023) MesaGrande (Version 1.0) [Computer program]. University of 
 Saskatchewan, Saskatoon, Canada.
 
 MLA:
 
-Burgess, David. MesaGrande. Version 1.0, University of Saskatchewan, 14 Jan. 
+* Burgess, David. MesaGrande. Version 1.0, University of Saskatchewan, 14 Jan. 
 2023.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
