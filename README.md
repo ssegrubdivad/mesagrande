@@ -74,25 +74,25 @@ SOFTWARE.
 ## Included Methods
 
 * [Calculate Distance](#calculate-distance)
-* Move Randomly 
-* Move Away 
-* Move Toward
-* Choose Random Agent Variable Value
-* Increment Other Agent Variable
-* Decrement Other Agent Variable
-* Change Other Agent Variable
-* Update Agent Record
-* Update Agent Record in Radius 
-* Edit Other Agent's Variable
-* Only I Edit Other Agent's Variable
-* Increment Self Attribute
-* Decrement Self Attribute
-* Move Toward Position
-* Move Randomly, Collision Increment
-* Move Randomly, Collision Decrement
-* Move Between Positions
-* Interact with Random Other Agent
-* Play Tag
+* [Move Randomly](#move-randomly) 
+* [Move Away](#move-away)
+* [Move Toward](#move-toward)
+* [Choose Random Agent Variable Value](#choose-random-agent-variable-value)
+* [Increment Other Agent Variable](#increment-other-agent-variable)
+* [Decrement Other Agent Variable](#decrement-other-agent-variable)
+* [Change Other Agent Variable](#change-other-agent-variable)
+* [Update Agent Record](#update-agent-record)
+* [Update Agent Record in Radius](#update-agent-record-in-radius)
+* [Edit Other Agent's Variable](#edit-other-agents-variable)
+* [Only I Edit Other Agent's Variable](#only-i-edit-other-agents-variable)
+* [Increment Self Attribute](#increment-self-attribute)
+* [Decrement Self Attribute](#decrement-self-attribute)
+* [Move Toward Position](#move-toward-position)
+* [Move Randomly, Collision Increment](#move-randomly-collision-increment)
+* [Move Randomly, Collision Decrement](#move-randomly-collision-decrement)
+* [Move Between Positions](#move-between-positions)
+* [Interact with Random Other Agent](#interact-with-random-other-agent)
+* [Play Tag](#play-tag)
 
 
 ### Calculate Distance
