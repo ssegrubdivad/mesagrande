@@ -261,7 +261,7 @@ else:
     pass
 ```
 
-**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it allows the colling agent to edits other agent's attributes:
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it allows the calling agent to edit another agent's attributes:
 ```python
 step():
     self.edit_other_agent_var(other_agent, 'var_name', new_value)
