@@ -160,10 +160,106 @@ step():
 ### Increment Other Agent Variable
 This method takes two arguments: ```other_agent``` (as an object) and ```var_name``` (as a string). The method first checks if the other agent has a variable with the name of the given ```var_name``` using Python's ```hasattr()``` method. If the other agent does have the variable, it uses Python's ```setattr()``` method to increment the value of the variable by 1. If the other agent does not have the variable, it prints a message saying that the agent does not have the variable.
 
-**Potential Use:** This method may be useful to record the passing of information from one agent to another, but only where the other agent is considered a passive recipient (as, when calling this method, the other agent has no choice but to accept the incremementing of their variable var_name).
+**Potential Use:** This method may be useful to record the passing of information from one agent to another, but only where the other agent is considered a passive recipient (as, when calling this method, the other agent has no choice but to accept the incremementing of their variable ```var_name```).
 
 **Call:** You may call this method in the ```step()``` method of an agent, as shown below; it increments the variable of another agent:
 ```python
 step():
     self.increment_other_agent_var(other_agent, 'var_name')
+```
+
+
+### Decrement Other Agent Variable
+This method takes two arguments: ```other_agent``` (as an object) and ```var_name``` (as a string). The method first checks if the other agent has a variable with the name of the given ```var_name``` using Python's ```hasattr()``` method. If the other agent does have the variable, it uses Python's ```setattr()``` method to decrement the value of the variable by 1. If the other agent does not have the variable, it prints a message saying that the agent does not have the variable.
+
+**Potential Use:** This method may be useful to record the passing of information from one agent to another, but only where the other agent is considered a passive recipient (as, when calling this method, the other agent has no choice but to accept the decremementing of their variable ```var_name```).
+
+Call: You may call this method in the ```step()``` method of an agent, as shown below; it decrements the variable of another agent:
+```python
+step():
+    self.decrement_other_agent_var(other_agent, 'var_name')
+```
+
+
+### Change Other Agent Variable
+This method takes three arguments: ```other_agent``` (as an object), ```var_name``` (as a string), and ```new_value``` (as any data type). The method first checks if the passed other agent has a variable with the name passed as ```var_name``` using Python's ```hasattr()``` method. If the other agent does have the variable, the method uses Python's ```setattr()``` method to change the value of the variable to the passed ```new_value```. If the other agent does not have the variable, the method prints a message saying that the agent does not have the variable.
+
+**Potential Use:** This method may be useful to record the passing of information from one agent to another, but only where the other agent is considered a passive recipient (as, when calling this method, the other agent has no choice but to accept the new value of their variable ```var_name```).
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it changes the variable of another agent to any value you want:
+```python
+step():
+    self.change_other_agent_var(other_agent, 'var_name', new_value)
+```
+
+
+### Update Agent Record
+This method takes three arguments: ```other_agent``` (as an object), ```var_name``` (as a string), and ```new_value``` (as any data type). The method iterates over the list of agent_records and checks if the ```unique_id``` value of the record matches the given ```unique_id``` of the other agent. If it does, it updates the record with the new ```var_name``` and value. If it doesn't find a match, it appends a new record with the ```unique_id``` of the other agent, the ```var_name```, and value to the ```agent_records``` list.
+
+**Potential Use:** This method may be useful to record the passing of information about other agents by the calling agent.
+
+**NB:** Be sure to include the following attribute within the Agent's constructor method to initialize the ```self.agent_records``` iterable:
+```python
+def __init__(self, unique_id, model):
+    super().__init__(unique_id, model)
+    self.agent_records = [] # <— this line is required to be added
+```
+
+**NB:** The resulting self.agent_records iterable is formatted as follows:
+```python
+[[unique_id_x, ('var_name', new_value)],[unique_id_y, ('var_name', new_value)],[unique_id_z, ('var_name', new_value)]]
+```
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it updates the record of another agent based on its ```unique_id```:
+```python
+step():
+    self.update_agent_record(other_agent, 'var_name', new_value)
+```
+
+
+### Update Agent Record in Radius
+The method takes four arguments: ```other_agent``` (as an object), ```radius``` (as an integer), ```var_name``` (as a string), and ```new_value``` (as any data type). The method returns ```None```. This method differs from the ```update_agent_record()``` method (of MesaGrande) in that it takes the radius argument.
+
+The method first uses Mesa's grid's ```get_neighbors()``` method to collect all other agents within the given radius of the calling agent. A for loop is used to iterate through the list of agent records — that is, the ```self.agent_records``` — and checks for the record that has the same ```unique_id``` as the passed other agent. When it finds the record, it updates the variable name and value in the second dimension of the record.
+
+**Potential Use:** This method gives each agent the ability to observe other agents (perhaps all other agents, perhaps a select group or a single other agent) one at a time within a step from a given distance (and no farther away), and then record information about the other agents in their own journal — the ```self.agent_records``` variable. These observations are updated each time the other agent is observed (that is, this method does not create a chronological record).
+
+**NB:** Be sure to include the following within the Agent's constructor method to initialize the ```self.agent_records``` iterable:
+```python
+def __init__(self, unique_id, model):
+    super().__init__(unique_id, model)
+    self.agent_records = [] # <— this line is required to be added
+````
+
+NB: The resulting self.agent_records iterable is formatted as follows:
+```python
+[[unique_id_x, ('var_name', new_value)],[unique_id_y, ('var_name', new_value)],[unique_id_z, ('var_name', new_value)]]
+```
+
+**Call:** You may call this method in the step() method of an agent, as shown below; it updates the calling agent's records on another agent when that other agent is within a certain radius:
+```python
+step():
+    self.update_agent_record_in_radius(other_agent, radius, 'var_name', new_value)
+```
+
+### Edit Other Agent's Variable
+This method takes three arguments: ```other_agent``` (as an object), ```var_name``` (as a string), and ```new_value``` (as any data type). The method uses Python's ```hasattr()``` method to check if the other agent already has an attribute with the same name as the ```var_name``` passed to the method. If the other agent does, this method updates the value of the variable to the ```new_value``` passed to the method. If the attribute does not exist, it creates the variable and assigns the ```new_value``` passed to the method. In common use, it may be helpful to limit those other agents passed to this method such that they are within only a certain radius around the calling agent seeking to update the other agent's attribute's value. This could be done by using the ```choose_random_agent_var_value()``` method (of MesaGrande).
+
+**Potential Use:** This method may be useful for situations when an agent requires the ability to (independent of the other agent) add and edit an attribute of that other agent, and which that other agent did not have a birth (when added to the grid). This situation might be considered analogous to infecting agents with some attribute, the severity of which could be changed by other agents, without the infected agent knowing that the infection has happened or that the severity has changed. Please be sure to read the NB caveat, below.
+
+**NB:** When using this method, be aware that ```AttributeErrors``` may arise if these not handled appropriately. This will happen because the var_name variable is being referenced by the ```edit_other_agent_var()``` method (of MesaGrande) before the variable is created — Python assumes that variables will be defined before they are referenced. Consider implementing the following ```try/except/else``` statements to ensure such errors do not cause the simulation to fail:
+```python
+try other_agent.var_name:
+except (AttributeError, TypeError):
+    # do this when other_agent.var_name variable does not yet exist
+    pass
+else:
+    # do this when other_agent.var_name variable exists
+    pass
+```
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it allows the colling agent to edits other agent's attributes:
+```python
+step():
+    self.edit_other_agent_var(other_agent, 'var_name', new_value)
 ```
