@@ -1,4 +1,4 @@
-# mesaGrande
+# MesaGrande
 *Quick-start behavioural methods for the Mesa module of Python.*
 
 MesaGrande is a package of methods for use with the Mesa module in Python. Mesa supports the design and development of agent-based models (ABMs) that simulate the complexities of social interactions. These methods were designed, written, and tested by David Burgess (University of Saskatchewan), with acknowledgement (and equal parts frustration) attributed to OpenAI's ChatGPT. The below methods are contained within a custom Agent class (named AgentGrande) used with the Mesa module for Python designed by the members of Project Mesa. The included 20 methods have been designed to provide a quick-start means of implementing common, rudimentary, micro-social, -economic, and -health behaviours for agents of an Agent-Based Model (ABM). The methods rely on the existing design of the Agent class in the Mesa module.
@@ -44,23 +44,23 @@ from the use of this Software must include a citation analogous to the following
 
 AMA:
 
-* Burgess, D. MesaGrande [Computer software]. Version 1.0. Saskatoon, Canada: University of Saskatchewan; 2023.
+* Burgess, D. _MesaGrande_ [Computer software]. Version 1.0. Saskatoon, Canada: University of Saskatchewan; 2023.
 
 APA:
 
-* Burgess, D. (2023). MesaGrande (1.0) [Computer software]. University of Saskatchewan. http://github.com/ssegrubdivad/mesagrande
+* Burgess, D. (2023). _MesaGrande_ (1.0) [Computer software]. University of Saskatchewan. http://github.com/ssegrubdivad/mesagrande
 
 Chicago:
 
-* Burgess, David. MesaGrande. V. 1.0. University of Saskatchewan. Python. 2023.
+* Burgess, David. _MesaGrande_. V. 1.0. University of Saskatchewan. Python. 2023.
 
 Harvard:
 
-* Burgess, D. (2023) MesaGrande (Version 1.0) [Computer program]. University of Saskatchewan, Saskatoon, Canada.
+* Burgess, D. (2023) _MesaGrande_ (Version 1.0) [Computer program]. University of Saskatchewan, Saskatoon, Canada.
 
 MLA:
 
-* Burgess, David. MesaGrande. Version 1.0, University of Saskatchewan, 14 Jan. 2023.
+* Burgess, David. _MesaGrande_. Version 1.0, University of Saskatchewan, 14 Jan. 2023.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -262,4 +262,41 @@ else:
 ```python
 step():
     self.edit_other_agent_var(other_agent, 'var_name', new_value)
+```
+
+
+### Only I Edit Other Agent's Variable
+This method takes three arguments: ```other_agent``` (as an object), ```var_name``` (as a string), and ```new_value``` (as any data type). The method uses Python's ```hasattr()``` method to check if the other agent already has an attribute with the same name as the ```var_name``` variable passed to this method. If it does, this method then checks to see if the calling agent is the same agent that originally created the attribute in the other agent. If it is, it updates the value of the variable to the ```new_value``` passed in this method. If the variable does not exist, this method creates the variable and assigns the new_value passed to this method along with the ```unique_id``` of the calling agent. This method differs from the ```edit_other_agent_var()``` method (of MesaGrande) in that it only permits the the calling agent that created the attribute in the other agent to edit it in the future. Using this method, calling agents can potentially create and control different attributes in different other agents. In common use, it may be helpful to limit those other agents passed to this method such that they are within only a certain radius around the calling agent. This could be done by using the ```choose_random_agent_var_value()``` method (of MesaGrande).
+
+**Potential Use:** This method may be useful for situations when you want a calling agent to have the ability to (independent of another agent) add and edit an attribute of another agent that the other agent did not have a birth (that is, when added to the grid). This situation might be considered analogous to infecting agents with some attribute, the severity of which can only be changed by the original infecting agents, without the other agent knowing that the infection has happened or that the severity has changed. Please be sure to read the NB caveat, below.
+
+**NB:** When using this method, be aware that ```AttributeErrors``` may arise if these not handled appropriately. This will happen because the var_name variable is being referenced by the ```only_I_edit_other_agent_var()``` method before the variable is created — Python assumes that variables will be defined before they are referenced. Consider implementing the following ```try/except/else``` statements to ensure such errors do not cause the simulation to fail:
+```python
+try other_agent.var_name: # could also be written try self.var_name:
+except (AttributeError, TypeError):
+    # do this when other_agent.var_name or self.var_name variable does not yet exist
+    pass
+else:
+    # do this when other_agent.var_name or self.var_name variable exists
+    pass
+```
+
+**Call:** You may call this method in the step() method of an agent, as shown below; it allows the calling agent to edit another agent's attributes — and only the calling agent for that particular attribute of that other agent:
+```python
+step():
+    self.only_I_edit_other_agent_var(other_agent, 'var_name', new_value)
+```
+
+
+### Increment Self Attribute
+This method takes three arguments: ```attribute_name``` (as a string and which represents the name of the attribute to be incremented), ```guard_attribute_name``` (as a string and which represents the name of the attribute that acts as a guard), and ```inc_value``` (as a float and which represents the value by which the attribute to be incremented will be incremented). The method returns ```None```.
+
+This method first uses Python's ```getattr()``` method to retrieve the value of the ```guard_attribute_name```. If the value of the ```guard_attribute_name``` is ```False```, this method again uses Python's ```getattr()``` method to retrieve the current value of the ```attribute_name```. Following this, this method increments the current value of the ```attribute_name``` by the inc_value and next uses Python's ```setattr()``` method to update the ```attribute_name``` with the incremented value.
+
+**Potential Use:** This method may be useful for situations when the value of some attribute of the agent should progressively increase only when another attribute of that agent is switched off.
+
+**Call:** You may call this method in the step() method of an agent, as shown below; it increments an agent's attribute by the amount of the ```inc_value``` if a guard attribute is False:
+```python
+step():
+    self.increment_self_attribute('var_name', 'guard_var_name', inc_value)
 ```
