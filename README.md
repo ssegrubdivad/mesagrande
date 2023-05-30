@@ -72,24 +72,25 @@ SOFTWARE.
 
 **Included Methods**
 ----------
-* Calculate Distance
-* Move Randomly
-* Move Away
-* Move Toward
-* Choose Random Agent Variable Value
-* Increment Other Agent Variable
-* Decrement Other Agent Variable
-* Change Other Agent Variable
-* Update Agent Record
-* Update Agent Record in Radius
-* Edit Other Agent's Variable
-* Only I Edit Other Agent's Variable
-* Increment Self Attribute
-* Decrement Self Attribute
-* Move Toward Position
-* Move Randomly, Collision Increment
-* Move Randomly, Collision Decrement
-* Move Between Positions
-* Interact with Random Other Agent
-* Play Tag
+* Calculate Distance | * Edit Other Agent's Variable
+* Move Randomly | * Only I Edit Other Agent's Variable
+* Move Away | * Increment Self Attribute
+* Move Toward | * Decrement Self Attribute
+* Choose Random Agent Variable Value | * Move Toward Position
+* Increment Other Agent Variable | * Move Randomly, Collision Increment
+* Decrement Other Agent Variable | * Move Randomly, Collision Decrement
+* Change Other Agent Variable | * Move Between Positions
+* Update Agent Record | * Interact with Random Other Agent
+* Update Agent Record in Radius | * Play Tag
 
+**Calculate Distance**
+
+This method takes two positions as tuples of integers as its arguments and then calculates and returns as an integer the spacial distance from the first positional argument to the second positional argument.
+
+Potential Use: This method may be useful as a helper method for other micro-behaviour methods, and it is used as such within other methods of MesaGrande.
+
+Call: You may call this method from within the ```step()``` method of an agent, as shown below; it calculates the spacial distance between two positions passed as arguments to the method:
+```python
+step():
+    self.calculate_distance(pos1, pos2)
+```
