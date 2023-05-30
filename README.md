@@ -250,7 +250,7 @@ This method takes three arguments: ```other_agent``` (as an object), ```var_name
 
 **Potential Use:** This method may be useful for situations when an agent requires the ability to (independent of the other agent) add and edit an attribute of that other agent, and which that other agent did not have a birth (when added to the grid). This situation might be considered analogous to infecting agents with some attribute, the severity of which could be changed by other agents, without the infected agent knowing that the infection has happened or that the severity has changed. Please be sure to read the NB caveat, below.
 
-**NB:** When using this method, be aware that ```AttributeErrors``` may arise if these not handled appropriately. This will happen because the var_name variable is being referenced by the ```edit_other_agent_var()``` method (of MesaGrande) before the variable is created — Python assumes that variables will be defined before they are referenced. Consider implementing the following ```try/except/else``` statements to ensure such errors do not cause the simulation to fail:
+**NB:** When using this method, be aware that ```AttributeErrors``` may arise if these are not handled appropriately. This will happen because the ```var_name``` variable is being referenced by the ```edit_other_agent_var()``` method (of MesaGrande) before the variable is created — Python assumes that variables will be defined before they are referenced. Consider implementing the following ```try/except/else``` statements to ensure such errors do not cause the simulation to fail:
 ```python
 try other_agent.var_name:
 except (AttributeError, TypeError):
@@ -273,7 +273,7 @@ This method takes three arguments: ```other_agent``` (as an object), ```var_name
 
 **Potential Use:** This method may be useful for situations when you want a calling agent to have the ability to (independent of another agent) add and edit an attribute of another agent that the other agent did not have a birth (that is, when added to the grid). This situation might be considered analogous to infecting agents with some attribute, the severity of which can only be changed by the original infecting agents, without the other agent knowing that the infection has happened or that the severity has changed. Please be sure to read the NB caveat, below.
 
-**NB:** When using this method, be aware that ```AttributeErrors``` may arise if these not handled appropriately. This will happen because the var_name variable is being referenced by the ```only_I_edit_other_agent_var()``` method before the variable is created — Python assumes that variables will be defined before they are referenced. Consider implementing the following ```try/except/else``` statements to ensure such errors do not cause the simulation to fail:
+**NB:** When using this method, be aware that ```AttributeErrors``` may arise if these are not handled appropriately. This will happen because the ```var_name``` variable is being referenced by the ```only_I_edit_other_agent_var()``` method before the variable is created — Python assumes that variables will be defined before they are referenced. Consider implementing the following ```try/except/else``` statements to ensure such errors do not cause the simulation to fail:
 ```python
 try other_agent.var_name: # could also be written try self.var_name:
 except (AttributeError, TypeError):
