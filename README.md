@@ -72,6 +72,7 @@ SOFTWARE.
 
 **Included Methods**
 ----------
+   |  
 ---------- | ----------
 * Calculate Distance | * Edit Other Agent's Variable
 * Move Randomly | * Only I Edit Other Agent's Variable
