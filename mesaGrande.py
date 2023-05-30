@@ -66,7 +66,7 @@ class AgentGrande(Agent):
         Burgess, D. MesaGrande [Computer software]. Version 1.0. Saskatoon, Canada: University of Saskatchewan; 2023.
 
         APA:
-        Burgess, D. (2023). MesaGrande (1.0) [Computer software]. University of Saskatchewan. http://davidburgess.ca/mesa/mesaGrande/
+        Burgess, D. (2023). MesaGrande (1.0) [Computer software]. University of Saskatchewan. http://github.com/ssegrubdivad/mesagrande
 
         Chicago:
         Burgess, David. MesaGrande. V. 1.0. University of Saskatchewan. Python. 2023.
