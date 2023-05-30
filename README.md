@@ -101,7 +101,7 @@ This method takes two positions as tuples of integers as its arguments and then 
 
 **Potential Use:** This method may be useful as a helper method for other micro-behaviour methods, and it is used as such within other methods of MesaGrande.
 
-**Call:** You may call this method from within the ```step()``` method of an agent, as shown below; it calculates the spacial distance between two positions passed as arguments to the method:
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it calculates the spacial distance between two positions passed as arguments to the method:
 ```python
 step():
     self.calculate_distance(pos1, pos2)
@@ -174,7 +174,7 @@ This method takes two arguments: ```other_agent``` (as an object) and ```var_nam
 
 **Potential Use:** This method may be useful to record the passing of information from one agent to another, but only where the other agent is considered a passive recipient (as, when calling this method, the other agent has no choice but to accept the decremementing of their variable ```var_name```).
 
-Call: You may call this method in the ```step()``` method of an agent, as shown below; it decrements the variable of another agent:
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it decrements the variable of another agent:
 ```python
 step():
     self.decrement_other_agent_var(other_agent, 'var_name')
@@ -236,7 +236,7 @@ NB: The resulting self.agent_records iterable is formatted as follows:
 [[unique_id_x, ('var_name', new_value)],[unique_id_y, ('var_name', new_value)],[unique_id_z, ('var_name', new_value)]]
 ```
 
-**Call:** You may call this method in the step() method of an agent, as shown below; it updates the calling agent's records on another agent when that other agent is within a certain radius:
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it updates the calling agent's records on another agent when that other agent is within a certain radius:
 ```python
 step():
     self.update_agent_record_in_radius(other_agent, radius, 'var_name', new_value)
@@ -281,7 +281,7 @@ else:
     pass
 ```
 
-**Call:** You may call this method in the step() method of an agent, as shown below; it allows the calling agent to edit another agent's attributes — and only the calling agent for that particular attribute of that other agent:
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it allows the calling agent to edit another agent's attributes — and only the calling agent for that particular attribute of that other agent:
 ```python
 step():
     self.only_I_edit_other_agent_var(other_agent, 'var_name', new_value)
@@ -295,8 +295,90 @@ This method first uses Python's ```getattr()``` method to retrieve the value of 
 
 **Potential Use:** This method may be useful for situations when the value of some attribute of the agent should progressively increase only when another attribute of that agent is switched off.
 
-**Call:** You may call this method in the step() method of an agent, as shown below; it increments an agent's attribute by the amount of the ```inc_value``` if a guard attribute is False:
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it increments an agent's attribute by the amount of the ```inc_value``` if a guard attribute is ```False```:
 ```python
 step():
     self.increment_self_attribute('var_name', 'guard_var_name', inc_value)
+```
+
+
+### Decrement Self Attribute
+This method takes three arguments: ```attribute_name``` (as a string and which represents the name of the attribute to be decremented), ```guard_attribute_name``` (as a string and which represents the name of the attribute that acts as a guard), and ```dec_value``` (as a float and which represents the value by which the attribute to be decremented will be decremented). The method returns ```None```.
+
+This method first uses Python's ```getattr()``` method to retrieve the value of the ```guard_attribute_name```. If the value of the ```guard_attribute_name``` is ```False```, this method again uses Python's ```getattr()``` method to retrieve the current value of the ```attribute_name```. Following this, this method decrements the current value of the ```attribute_name``` by the ```dec_value``` and next uses Python's ```setattr()``` method to update the ```attribute_name``` with the decremented value.
+
+**Potential Use:** This method may be useful for situations when the value of some attribute of the agent should progressively decrease only when another attribute of that agent is switched off.
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it decrements an agent's attribute by the amount of the ```dec_value``` if a guard attribute is ```False```:
+```python
+step():
+    self.decrement_self_attribute('var_name', 'guard_var_name', dec_value)
+```
+
+
+### Move Toward Position
+This method takes two arguments: ```x``` and ```y``` (which are integers representing the x and y coordinates of the position the calling agent should move towards). It returns ```None```.
+
+This method first calculates the respective difference between the ```x``` and ```y``` coordinates of the calling agent's current position and the target position.
+
+The method then checks if the difference between the ```x```s is greater than the difference between the ```y```s, if so it moves the agent one step closer to the target position in the x-direction. If not, it moves the agent one step closer to the target position in the y-direction.
+
+The included ```move()``` helper method takes two arguments: ```dx``` and ```dy``` (as integers representing the change in position of the calling agent in the x and y direction). The ```move()``` helper method returns ```None```.
+
+The ```move()``` helper method first calculates the new position of the agent based on its current position and the change in position passed as arguments. It then checks if the new position is occupied or not, if it is not occupied the ```move()``` helper method moves the agent to that position by calling Mesa's ```move_agent()``` method of the grid and passing the calling agent and the new position as arguments. If the new position is occupied, it iterates through a list of adjacent positions and checks if any of them are unoccupied. If an unoccupied position is found, it moves the agent to that position, otherwise it will not move the agent.
+
+**Potential Use:** This method may be useful when agents are required to move to a certain location (perhaps for a given period of time) as directly as possible while still avoiding other agents.
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it moves the agent one space on the grid closer to a given position on the grid until it arrives at that position and stops or it encounters an obstacle in the path of the agent to the given position and attempts to move around the obstacle:
+```python
+step():
+    self.move_toward_position(x, y)
+```
+
+
+### Move Randomly, Collision Increment
+This method takes in three arguments: ```OtherAgentClass``` (a class of agents to check against for collision), ```var_name``` (as a string and which represents the attribute of the calling agent to increment if a collision occurs), and ```inc_value``` (as an integer and which represents the amount to increment ```var_name``` by if a collision occurs).
+
+This method moves the calling agent randomly on the grid, then checks if the calling agent's new position is the same as the position of an agent of the class ```OtherAgentClass```. If it is, it increments the variable ```var_name``` by the amount of ```inc_value```.
+
+**Potential Use:** This method may be useful when contact between agents of different types causes an incremental change in some attribute of one (or both, if the method is applied to the ```step()``` method of both agent types).
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it moves the calling agent randomly on the grid and when it collides with an agent of a different class, the attribute passed to the method is incremented by the value also passed:
+```python
+step():
+    self.move_randomly_collision_increment(OtherAgentClass, 'var_name', inc_value)
+```
+
+
+### Move Randomly, Collision Decrement
+This method takes in three arguments: ```OtherAgentClass``` (a class of agents to check against for collision), ```var_name``` (as a string and which represents the attribute of the calling agent to decrement if a collision occurs), and ```dec_value``` (as an integer and which represents the amount to decrement ```var_name``` by if a collision occurs).
+
+This method moves the calling agent randomly on the grid, then checks if the calling agent's new position is the same as the position of an agent of the class ```OtherAgentClass```. If it is, it decrements the variable ```var_name``` by the amount of ```dec_value```.
+
+**Potential Use:** This method may be useful when contact between agents of different types causes a decremental change in some attribute of one (or both, if the method is applied to the ```step()``` method of both agent types).
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it moves the calling agent randomly on the grid and when it collides with an agent of a different class, the attribute passed to the method is decremented by the value also passed:
+```python
+step():
+    self.move_randomly_collision_decrement(OtherAgentClass, 'var_name', value)
+```
+
+
+### Move Between Positions
+This method takes two arguments: ```pos1``` and ```pos2```, which are tuples of integers representing the x and y coordinates of the two positions on the grid that the agent should move between. It returns ```None```.
+
+This method first checks if the ```self.move_toward_position_1``` attribute of the ```AgentGrande``` class (of MesaGrande) is ```True```. If it is (which it is by default), the method next checks if the calling agent's current position is not equal to ```pos1```. If it is not equal, the calling agent moves one step towards ```pos1```, using the ```move_toward()``` method (of MesaGrande). If the calling agent's current position is not not equal to (that is, equal to) ```pos1```, it sets the ```self.move_toward_position_1``` attribute of the ```AgentGrande``` class (of MesaGrande) to ```False```. If the ```self.move_toward_position_1``` attribute of the ```AgentGrande``` class (of MesaGrande) is found to be ```False```, the method next checks if the calling agent's current position is not equal to ```pos2```. If it is not equal, the calling agent moves one step toward ```pos2``` using the ```move_toward()``` method (of MesaGrande). If the calling agent's current position is not not equal to (that is, equal to) ```pos2```, it sets the ```self.move_toward_position_1``` attribute of the ```AgentGrande``` class (of MesaGrande) to ```True```.
+
+This method should be called within the step() method of the Agent class to make the agent move back and forth between the two positions continuously — or until the code in the ```step()``` method programmatically stops calling this method.
+
+**Potential Use:** This method may be useful when agents are required to move between two specific positions on the grid until this behaviour is no longer needed.
+
+**NB:** If ```pos1``` and ```pos2``` do not both intersect a perfectly horizontal, vertical, or diagonal (45 degree) line, the calling agent's path from ```pos1``` to ```pos2``` may differ from that when it travels back from ```pos2``` to ```pos1```.
+
+**NB:** This method relies on the ```self.move_toward_position_1``` attribute of the ```AgentGrande``` class. This attribute exists within the ```mesaGrande.py``` file. Be aware that this attribute name is consequentially reserved and cannot be used elsewhere within any other object of the simulation.
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it moves the agent one space on the grid towards pos1 and then towards pos2 alternatively once one of these endpoints has been reached:
+```python
+step():
+    self.move_between_positions((pos1_x, pos1_y), (pos2_x, pos2_y))
 ```
