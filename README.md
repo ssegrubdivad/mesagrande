@@ -382,3 +382,47 @@ This method should be called within the ```step()``` method of the Agent class t
 step():
     self.move_between_positions((pos1_x, pos1_y), (pos2_x, pos2_y))
 ```
+
+
+### Interact with Random Other Agent
+This method takes in two arguments: ```var_name``` (as a string) and ```value``` (as an integer, representing the value to be added or updated in the ```agent_records``` attribute of another agent). The method returns ```None```.
+
+The method first selects a random agent from the list of agents in the model's schedule. The method then checks if the selected agent is the same agent as the calling agent. If it is the same agent, it selects another random agent.
+
+Next, the method checks if the calling agent's position is not the same as the selected agent's position, and if this is so, the method calls the ```move_toward()``` method (of MesaGrande) to move one space at a time towards the selected agent's position on the grid.
+
+If the calling agent's position is the same as the selected agent's position, the method then iterates through the ```agent_records``` attribute of the selected agent. If the method finds an entry that includes the calling agent's ```unique_id``` in the first entry of a record, it increments the value in the second entry of the second entry of the record, and prints a message indicating that the calling agent has updated the selected agent's ```agent_records``` attribute.
+
+If the method does not find an entry that includes the calling agent's ```unique_id``` in the first entry of a record, it adds a new entry to the selected agent's ```agent_records``` attribute that includes the calling agent's ```unique_id``` in the first entry, the value passed in the second entry of the second entry of the newly created record, and the ```var_name``` passed as an argument as the first entry of the second entry. The method also prints a message that the calling agent has interacted with the selected agent for the first time.
+
+Next, the method calls the ```move_randomly()``` method (of MesaGrande) to move the calling agent randomly around the grid.
+
+**Potential Use:** This method may be useful when agents are required to interact with other agents in a simulation, such as updating a record or linking one agent with another.
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it moves the agent towards a randomly selected agent, and updates or adds a record in the agent_records attribute of the selected agent:
+```python
+step():
+    self.interact_with_random_other_agent('var_name', value)
+```
+
+
+### Play Tag
+This method takes in two arguments: ```it_radius```, an integer representing the distance within which the "it" agent should move toward other agents; and ```not_it_radius```, an integer representing the distance within which other agents should move away from the "it" agent.
+
+The method plays a game of tag among all the agents. It uses the attribute of the ```AgentGrande``` class ```self.play_tag_it``` to keep track of the agent that is "it", and changes the value of this attribute to the next agent if an agent that is not "it" is in the same position on the grid as the agent that is "it".
+
+When an agent calls this method, the method first checks if the attribute of the ```AgentGrande``` class ```self.play_tag_it_begin``` is set to ```False```. If this is the case, it sets all agents' ```self.play_tag_it``` attribute to ```False``` and then selects a random agent to be "it" by setting the selected agent's ```self.play_tag_it``` attribute to ```True```. Next, the ```self.play_tag_it_begin``` attribute of all agents within the grid is set to ```True``` — this ensures that only one agent is randomly selected to be "it" and this only happens in the very first step of the simulation.
+
+If the attribute ```self.play_tag_it_begin``` is ```True```, the method checks whether the calling agent is "it" or not by looking at the calling agent's ```self.play_tag_it``` attribute. If the agent is "it", this method uses Mesa's ```get_neighbors()``` method to find all other agents within the radius passed to the method as ```it_radius``` and selects the closest agent to move towards. If the calling agent and the closest agent are in the same position on the grid, the closest agent becomes "it" and the calling agent is no longer "it".
+
+If the agent is not "it", it uses Mesa's ```get_neighbors()``` method to find all agents within the radius passed to the method as ```not_it_radius```. If there are any agents within this radius, the calling agent will move away from the other agent that is "it" among them. If there are no agents within this radius, the calling agent will move randomly.
+
+**Potential Use:** This method may be useful when agents are required to behave in a manner analogous to a game of tag. The agent that is "it" will change every time the agent that is "it" occupies the same position as another agent.
+
+**NB:** This method relies on the ```self.play_tag_it``` and ```self.play_tag_it_begin``` attributes of the ```AgentGrande``` class. These attributes exists within the ```mesaGrande.py``` file. Be aware that the names of these attributes are consequentially reserved and cannot be used elsewhere within any other object of the simulation.
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it simulates a game of tag among the agents:
+```python
+step():
+    self.play_tag(it_radius, not_it_radius)
+```
