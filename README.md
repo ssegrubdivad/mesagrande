@@ -20,4 +20,4 @@ class MyAgent(AgentGrande):
 
 **Limitations and Assumptions:**
 
-The methods assume that the MultiGrid class is used and that the grid (or lattice) is toroidal. Agent neighbourhoods are assumed to be Moore.
+The methods assume that the ```MultiGrid``` class is used and that the grid (or lattice) is toroidal. Agent neighbourhoods are assumed to be Moore.
