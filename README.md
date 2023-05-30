@@ -20,6 +20,7 @@ class MyAgent(AgentGrande):
 4. All of the methods included may now be used within your simulation.
 
 **Limitations and Assumptions:**
+----------
 
 The methods assume that the ```MultiGrid``` class is used and that the grid (or lattice) is toroidal. Agent neighbourhoods are assumed to be Moore.
 
@@ -43,13 +44,11 @@ from the use of this Software must include a citation analogous to the following
 
 AMA:
 
-* Burgess, D. MesaGrande [Computer software]. Version 1.0. Saskatoon, Canada: 
-University of Saskatchewan; 2023.
+* Burgess, D. MesaGrande [Computer software]. Version 1.0. Saskatoon, Canada: University of Saskatchewan; 2023.
 
 APA:
 
-* Burgess, D. (2023). MesaGrande (1.0) [Computer software]. University of 
-Saskatchewan. http://github.com/ssegrubdivad/mesagrande
+* Burgess, D. (2023). MesaGrande (1.0) [Computer software]. University of Saskatchewan. http://github.com/ssegrubdivad/mesagrande
 
 Chicago:
 
@@ -57,13 +56,11 @@ Chicago:
 
 Harvard:
 
-* Burgess, D. (2023) MesaGrande (Version 1.0) [Computer program]. University of 
-Saskatchewan, Saskatoon, Canada.
+* Burgess, D. (2023) MesaGrande (Version 1.0) [Computer program]. University of Saskatchewan, Saskatoon, Canada.
 
 MLA:
 
-* Burgess, David. MesaGrande. Version 1.0, University of Saskatchewan, 14 Jan. 
-2023.
+* Burgess, David. MesaGrande. Version 1.0, University of Saskatchewan, 14 Jan. 2023.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
