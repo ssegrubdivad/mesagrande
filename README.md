@@ -149,7 +149,7 @@ step():
 
 
 ### Choose Random Agent Variable Value
-This method takes four arguments: ```radius``` (as an integer), ```var_name``` (as a string), ```value``` (as any data type), and ```operator``` (one of the six valid operator types ['==', '<', '>', '<=', '>=', or '!=']). It uses the ```get_neighbors()``` method of Mesa's MultiGrid class to retrieve all other agents within the radius of the calling agent. It filters out those agents that are not objects, the calling agent itself, and those agents that do not have as their value for the ```var_name``` variable compliant with the given operator. The method returns a randomly chosen agent from the filtered list of possible agents. If there is no possible agent within the radius, this method returns None.
+This method takes four arguments: ```radius``` (as an integer), ```var_name``` (as a string), ```value``` (as any data type), and ```operator``` (one of the six valid operator types ['==', '<', '>', '<=', '>=', or '!=']). It uses the ```get_neighbors()``` method of Mesa's MultiGrid class to retrieve all other agents within the radius of the calling agent. It filters out those agents that are not objects, the calling agent itself, and those agents that do not have as their value for the ```var_name``` variable compliant with the given operator. The method returns a randomly chosen agent from the filtered list of possible agents. If there is no possible agent within the radius, this method returns ```None```.
 
 **Potential Use:** This method may be useful in instances when an agent needs to identify another agent with a specific attribute in advance of taking other actions.
 
