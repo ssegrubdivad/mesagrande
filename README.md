@@ -45,23 +45,23 @@ copies or substantial portions of the Software.
 Any academic work (publication or presentation) or commercial usage resulting 
 from the use of this Software must include a citation analogous to the following:
 
-AMA:
+**AMA:**
 
 * Burgess, D. _MesaGrande_ [Computer software]. Version 1.0. Saskatoon, Canada: University of Saskatchewan; 2023.
 
-APA:
+**APA:**
 
 * Burgess, D. (2023). _MesaGrande_ (1.0) [Computer software]. University of Saskatchewan. http://github.com/ssegrubdivad/mesagrande
 
-Chicago:
+**Chicago:**
 
 * Burgess, David. _MesaGrande_. V. 1.0. University of Saskatchewan. Python. 2023.
 
-Harvard:
+**Harvard:**
 
 * Burgess, D. (2023) _MesaGrande_ (Version 1.0) [Computer program]. University of Saskatchewan, Saskatoon, Canada.
 
-MLA:
+**MLA:**
 
 * Burgess, David. _MesaGrande_. Version 1.0, University of Saskatchewan, 14 Jan. 2023.
 
