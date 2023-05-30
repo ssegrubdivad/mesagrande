@@ -121,3 +121,49 @@ step():
 ```
 
 
+### Move Away
+This method takes a grid coordinate position (in the form of a tuple consisting of two integers) as its argument and calculates the distance between that position and the current position of the calling agent. It then checks if the calling agent is closer to the right or left side of the grid, or if it is closer to the top or bottom of the grid — it then moves the agent one step on the grid away from the target position.
+
+**Potential Use:** This method may be useful for simulating avoidance behaviours among agents.
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it moves the calling agent one step on the grid away from the target position:
+```python
+step():
+    self.move_away(target_pos)
+```
+
+
+### Move Toward
+This method takes a grid coordinate position (in the form of a tuple consisting of two integers) as its argument and calculates the distance between that position and the current position of the calling agent. It then checks if the calling agent is closer to the right or left side of the grid, or if it is closer to the top or bottom of the grid — it then moves the agent one step on the grid closer to the target position.
+
+**Potential Use:** This method may be useful for simulating attraction behaviours among agents.
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it moves the calling agent one step on the grid closer to the target position:
+```python
+step():
+    self.move_toward(target_pos)
+```
+
+
+### Choose Random Agent Variable Value
+This method takes four arguments: ```radius``` (as an integer), ```var_name``` (as a string), ```value``` (as any data type), and ```operator``` (one of the six valid operator types ['==', '<', '>', '<=', '>=', or '!=']). It uses the ```get_neighbors()``` method of Mesa's MultiGrid class to retrieve all other agents within the radius of the calling agent. It filters out those agents that are not objects, the calling agent itself, and those agents that do not have as their value for the ```var_name``` variable compliant with the given operator. The method returns a randomly chosen agent from the filtered list of possible agents. If there is no possible agent within the radius, this method returns None.
+
+**Potential Use:** This method may be useful in instances when an agent needs to identify another agent with a specific attribute in advance of taking other actions.
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it will select an agent randomly based on an agent class and a particular variable value:
+```python
+step():
+    self.choose_random_agent_variable_value(radius, 'var_name', var_value, 'operator_type')
+```
+
+
+### Increment Other Agent Variable
+This method takes two arguments: ```other_agent``` (as an object) and ```var_name``` (as a string). The method first checks if the other agent has a variable with the name of the given ```var_name``` using Python's ```hasattr()``` method. If the other agent does have the variable, it uses Python's ```setattr()``` method to increment the value of the variable by 1. If the other agent does not have the variable, it prints a message saying that the agent does not have the variable.
+
+**Potential Use:** This method may be useful to record the passing of information from one agent to another, but only where the other agent is considered a passive recipient (as, when calling this method, the other agent has no choice but to accept the incremementing of their variable var_name).
+
+**Call:** You may call this method in the ```step()``` method of an agent, as shown below; it increments the variable of another agent:
+```python
+step():
+    self.increment_other_agent_var(other_agent, 'var_name')
+```
